@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "webapck": "webpack",
+    "webapck": "rimraf ./dist && webpack",
     "dev": "webpack-dev-server"
   },
   "dependencies": {
@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "export-loader": "^1.0.52",
+    "rimraf": "^3.0.0",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.10.1"
