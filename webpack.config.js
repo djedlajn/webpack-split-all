@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const WebpackMd5Hash = require('webpack-md5-hash')
 const AssetsPlugin = require('assets-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = config => {
   return {
@@ -9,7 +10,11 @@ module.exports = config => {
       filename: '[name]-[chunkhash].js',
       chunkFilename: '[name]-[chunkhash].js',
     },
+    module: {
+
+    },
     optimization: {
+      minimize: false,
       runtimeChunk: 'single',
       splitChunks: {
         chunks: 'all',
@@ -19,7 +24,6 @@ module.exports = config => {
           vendor: {
             test: /[\\/]node_modules[\\/]/,
             name(module) {
-              console.log('MODULE', module.context)
               const packageName = module.context.match(
                 /[\\/]node_modules[\\/](.*?)([\\/]|$)/,
               )[1]
@@ -29,6 +33,10 @@ module.exports = config => {
         },
       },
     },
-    plugins: [new AssetsPlugin(), new webpack.HashedModuleIdsPlugin()],
+    plugins: [
+      new AssetsPlugin(),
+      new webpack.HashedModuleIdsPlugin(),
+      new HtmlWebpackPlugin(),
+    ],
   }
 }
